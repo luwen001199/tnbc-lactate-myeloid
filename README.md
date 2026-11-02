@@ -1,5 +1,7 @@
 # tnbc-lactate-myeloid
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23888671.svg)](https://doi.org/10.5281/zenodo.23888671)
+
 Analysis code for **"Lactate-driven trained immunity defines prognostically distinct
 myeloid states in triple-negative breast cancer: a multi-cohort transcriptomic and
 single-cell study"**.
@@ -146,4 +148,4 @@ release:
 
 > Lu W (2026). *tnbc-lactate-myeloid*: analysis pipeline for lactate-associated
 > myeloid trained states in triple-negative breast cancer (Version 1.0.0) [Computer
-> software]. Zenodo. https://doi.org/10.5281/zenodo.DOI-NUMBER
+> software]. Zenodo. https://doi.org/10.5281/zenodo.23888671
