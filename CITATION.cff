@@ -8,8 +8,8 @@ authors:
 version: 1.0.0
 date-released: "2026-01-01"
 license: MIT
-repository-code: "https://github.com/ACCOUNT/tnbc-lactate-myeloid"
-url: "https://github.com/ACCOUNT/tnbc-lactate-myeloid"
+repository-code: "https://github.com/luwen001199/tnbc-lactate-myeloid"
+url: "https://github.com/luwen001199/tnbc-lactate-myeloid"
 abstract: >-
   Reproducible pipeline for the study "Lactate-driven trained immunity defines
   prognostically distinct myeloid states in triple-negative breast cancer". It builds
