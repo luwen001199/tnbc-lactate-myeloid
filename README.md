@@ -144,6 +144,6 @@ per population), so this is a genuine test of robustness rather than a restateme
 MIT; see `LICENSE`. If you reuse this code, please cite the article and the archived
 release:
 
-> Authors (2026). *tnbc-lactate-myeloid*: analysis pipeline for lactate-associated
+> Lu W (2026). *tnbc-lactate-myeloid*: analysis pipeline for lactate-associated
 > myeloid trained states in triple-negative breast cancer (Version 1.0.0) [Computer
-> software]. Zenodo. https://doi.org/10.5281/zenodo.XXXXXXX
+> software]. Zenodo. https://doi.org/10.5281/zenodo.DOI-NUMBER

@@ -3,14 +3,13 @@ title: "tnbc-lactate-myeloid: analysis pipeline for lactate-associated myeloid t
 message: "If you use this software, please cite it as below."
 type: software
 authors:
-  - name: "[Corresponding author]"
-    affiliation: "[Affiliation]"
-    orcid: "https://orcid.org/[ORCID]"
+  - name: "Wenliang Lu"
+    affiliation: "Department of Thyroid and Breast Surgery, Maternal and Child Health Hospital of Hubei Province, Wuhan 430070, China"
 version: 1.0.0
 date-released: "2026-01-01"
 license: MIT
-repository-code: "https://github.com/<account>/tnbc-lactate-myeloid"
-url: "https://github.com/<account>/tnbc-lactate-myeloid"
+repository-code: "https://github.com/ACCOUNT/tnbc-lactate-myeloid"
+url: "https://github.com/ACCOUNT/tnbc-lactate-myeloid"
 abstract: >-
   Reproducible pipeline for the study "Lactate-driven trained immunity defines
   prognostically distinct myeloid states in triple-negative breast cancer". It builds
@@ -30,5 +29,5 @@ preferred-citation:
   title: "Lactate-driven trained immunity defines prognostically distinct myeloid states in triple-negative breast cancer: a multi-cohort transcriptomic and single-cell study"
   year: 2026
   authors:
-    - name: "[Corresponding author]"
-      affiliation: "[Affiliation]"
+    - name: "Wenliang Lu"
+      affiliation: "Department of Thyroid and Breast Surgery, Maternal and Child Health Hospital of Hubei Province, Wuhan 430070, China"
