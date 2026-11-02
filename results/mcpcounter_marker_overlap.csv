@@ -1,0 +1,11 @@
+population,n_curated,n_official,shared,jaccard,metabric_official_covered
+T_cell,14,16,8,0.364,14
+CD8_T,11,1,1,0.091,1
+Cytotoxic,11,7,2,0.125,6
+NK,13,9,1,0.048,9
+B_cell,11,9,6,0.429,9
+Monocytic,16,7,1,0.045,7
+Myeloid_DC,12,6,1,0.059,5
+Neutrophil,11,15,1,0.04,14
+Endothelial,9,33,5,0.135,31
+Fibroblast,9,8,3,0.214,8

@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+title: "tnbc-lactate-myeloid: analysis pipeline for lactate-associated myeloid trained states in triple-negative breast cancer"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - name: "[Corresponding author]"
+    affiliation: "[Affiliation]"
+    orcid: "https://orcid.org/[ORCID]"
+version: 1.0.0
+date-released: "2026-01-01"
+license: MIT
+repository-code: "https://github.com/<account>/tnbc-lactate-myeloid"
+url: "https://github.com/<account>/tnbc-lactate-myeloid"
+abstract: >-
+  Reproducible pipeline for the study "Lactate-driven trained immunity defines
+  prognostically distinct myeloid states in triple-negative breast cancer". It builds
+  two directional myeloid gene-programme scores (LT-pro, LT-anti), residualises them on
+  an estimate of myeloid abundance, assigns tumours by a deterministic quadrant rule,
+  and validates the partition in TCGA-BRCA, METABRIC and GSE176078. All inputs are
+  public; no new experimental data were generated.
+keywords:
+  - trained immunity
+  - histone lactylation
+  - tumour-associated macrophage
+  - triple-negative breast cancer
+  - tumour microenvironment
+  - single-cell RNA-seq
+preferred-citation:
+  type: article
+  title: "Lactate-driven trained immunity defines prognostically distinct myeloid states in triple-negative breast cancer: a multi-cohort transcriptomic and single-cell study"
+  year: 2026
+  authors:
+    - name: "[Corresponding author]"
+      affiliation: "[Affiliation]"
