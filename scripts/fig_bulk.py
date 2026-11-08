@@ -56,22 +56,18 @@ def fig1_roadmap():
     ax.set_xlim(0, 100); ax.set_ylim(0, 34); ax.axis("off")
 
     boxes = [
-        (2, "TNBC glycolytic\nmicroenvironment\n(hypoxia, LDHA, MCT1/4)", "#F4A582"),
+        (1, "TNBC glycolytic\nmicroenvironment\n(hypoxia, LDHA,\nMCT1/4)", "#F4A582"),
         (21.5, "Lactate uptake by\nmonocytes / TAMs\n(SLC16A1, LDHA)", "#F4A582"),
-        (41, "p300/CBP-dependent\nhistone lactylation\nH3K9la / H3K18la", "#D6604D"),
-        (60.5, "Chromatin opening +\nhigh-CpG / low-methylation\nlate nt enhancer latch", "#B2182B"),
-        (80, "Two myeloid states:\npro-tumour memory vs\nIRF8/CCL8 anti-tumour", "#4393C3"),
+        (42, "p300/CBP-dependent\nhistone lactylation\nH3K9la / H3K18la", "#D6604D"),
+        (62.5, "Chromatin opening,\nCpG-island promoter,\nlate enhancer latch", "#B2182B"),
+        (83, "Two myeloid states:\npro-tumour memory\nvs IRF8/CCL8\nanti-tumour", "#4393C3"),
     ]
-    for x, txt, c in boxes[:-1]:
-        ax.add_patch(plt.Rectangle((x, 13), 15.5, 12, fc=c, ec="#333333", lw=0.7, alpha=0.95))
-        ax.text(x + 7.75, 19, txt, ha="center", va="center", fontsize=7, color="white",
-                fontweight="bold", linespacing=1.5)
-    x, txt, c = boxes[-1]
-    ax.add_patch(plt.Rectangle((x, 13), 17, 12, fc=c, ec="#333333", lw=0.7, alpha=0.95))
-    ax.text(x + 8.5, 19, txt, ha="center", va="center", fontsize=7, color="white",
-            fontweight="bold", linespacing=1.5)
+    for x, txt, c in boxes:
+        ax.add_patch(plt.Rectangle((x, 13), 17, 12, fc=c, ec="#333333", lw=0.7, alpha=0.95))
+        ax.text(x + 8.5, 19, txt, ha="center", va="center", fontsize=6.2, color="white",
+                fontweight="bold", linespacing=1.45)
 
-    for x0, x1 in [(17.5, 21.5), (37, 41), (56.5, 60.5), (76, 80)]:
+    for x0, x1 in [(18, 21.5), (38.5, 42), (59, 62.5), (79.5, 83)]:
         ax.annotate("", xy=(x1, 19), xytext=(x0, 19),
                     arrowprops=dict(arrowstyle="-|>", lw=1.2, color="#333333"))
 
