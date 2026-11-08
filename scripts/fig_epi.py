@@ -32,7 +32,7 @@ PCOL = {"Anti-tumour trained": "#2166AC", "Pro-tumour suppressive": "#B2182B",
         "Innate antiviral (control)": "#7F7F7F"}
 
 fig = plt.figure(figsize=(9.6, 8.4))
-gs = fig.add_gridspec(3, 3, hspace=0.62, wspace=0.38,
+gs = fig.add_gridspec(3, 3, hspace=0.62, wspace=0.58,
                       top=0.93, bottom=0.07, left=0.075, right=0.975)
 
 # ---------------------------------------------------------------- (a) architecture heatmap
@@ -47,30 +47,50 @@ sns.heatmap(M, annot=True, fmt=".0f", cmap="YlOrRd", vmin=0, vmax=100, ax=ax,
             cbar_kws=dict(shrink=0.6, label="% of promoters"),
             linewidths=0.5, linecolor="white", annot_kws={"size": 6})
 ax.set_yticklabels([p.replace(" ", "\n") for p in PROG_ORDER], rotation=0, fontsize=5.8)
-plt.setp(ax.get_xticklabels(), rotation=0, fontsize=5.6)
+plt.setp(ax.get_xticklabels(), rotation=45, ha="right", fontsize=5.6)
 ax.set_title("a  Promoter chromatin architecture", loc="left", fontweight="bold")
 
 # ---------------------------------------------------------------- (b) enrichment forest
-ax = fig.add_subplot(gs[0, 1:])
+# Four small multiples (one per myeloid mark) rather than 20 stacked rows: at print
+# size 20 two-line tick labels cannot be spaced further apart than their own height.
 e = enr[(enr.set == "panel") & (enr.feature.isin(["monoA_k27ac", "monoA_k4me3",
                                                   "monoB_k27ac", "monoB_k4me3"]))].copy()
-e["prog"] = pd.Categorical(e.programme, PROG_ORDER, ordered=True)
-e = e.sort_values(["feature", "prog"])
-y = np.arange(len(e))
-ax.scatter(np.log2(e.OR.clip(lower=0.05)), y, s=18,
-           c=[PCOL[p] for p in e.programme], edgecolors="none")
-ax.axvline(0, color="#777777", ls="--", lw=0.8)
-ax.set_yticks(y)
-ax.set_yticklabels([f"{r.programme.replace(' (control)','')} · {r.feature.replace('mono','').replace('_','/')}"
-                    for _, r in e.iterrows()], fontsize=5.3)
-ax.set_xlim(-4.6, 4.0)
-ax.set_xticks([-4, -2, 0, 2, 4]); ax.set_xticklabels(["0.06", "0.25", "1", "4", "16"])
-ax.set_xlabel("Odds ratio vs all RefSeq promoters (log2)")
-ax.set_title("b  Myeloid active-promoter enrichment", loc="left", fontweight="bold")
-for i, (_, r) in enumerate(e.iterrows()):
-    ax.text(3.55, i, "*" if r.fdr < 0.05 else "n.s.", fontsize=5.2, va="center", ha="right")
-ax.text(0.0, 1.02, "all rows FDR < 0.05 unless marked", transform=ax.transAxes,
-        fontsize=5.0, color="#777777")
+MARK_LBL = {"monoA_k27ac": "Monocyte\nH3K27ac", "monoA_k4me3": "Monocyte\nH3K4me3",
+            "monoB_k27ac": "Monocyte 2\nH3K27ac", "monoB_k4me3": "Monocyte 2\nH3K4me3"}
+FEAT_ORDER = ["monoA_k27ac", "monoA_k4me3", "monoB_k27ac", "monoB_k4me3"]
+sub = gs[0, 1:].subgridspec(1, 4, wspace=0.16)
+axes_b = []
+for j, ft in enumerate(FEAT_ORDER):
+    axb = fig.add_subplot(sub[0, j], sharey=axes_b[0] if axes_b else None)
+    axes_b.append(axb)
+    d = e[e.feature == ft].copy()
+    d["prog"] = pd.Categorical(d.programme, PROG_ORDER, ordered=True)
+    d = d.sort_values("prog")
+    yy = np.arange(len(d))
+    axb.scatter(np.log2(d.OR.clip(lower=0.05)), yy, s=16,
+                c=[PCOL[p] for p in d.programme], edgecolors="none", zorder=3)
+    axb.axvline(0, color="#777777", ls="--", lw=0.7)
+    axb.set_xlim(-4.6, 4.0)
+    axb.set_xticks([-4, 0, 4]); axb.set_xticklabels(["0.06", "1", "16"], fontsize=5.4)
+    axb.set_title(MARK_LBL[ft].replace("\n", " "), fontsize=6.1, pad=3)
+    axb.tick_params(axis="y", length=0)
+    if j == 0:
+        axb.set_yticks(yy)
+        axb.set_yticklabels([p.replace(" ", "\n") for p in d.programme],
+                            fontsize=5.6, linespacing=1.05)
+    else:
+        plt.setp(axb.get_yticklabels(), visible=False)
+    for i, (_, r) in enumerate(d.iterrows()):
+        axb.text(3.85, i, "*" if r.fdr < 0.05 else "n.s.", fontsize=5.0,
+                 va="center", ha="right")
+    axb.spines["left"].set_visible(False)
+fig.canvas.draw()
+_b0, _b3 = axes_b[0].get_position(), axes_b[-1].get_position()
+fig.text((_b0.x0 + _b3.x1) / 2, _b0.y0 - 0.052,
+         "Odds ratio vs all RefSeq promoters (log2)",
+         ha="center", va="top", fontsize=8)
+fig.text(_b0.x0, _b0.y1 + 0.055, "b  Myeloid active-promoter enrichment",
+         ha="left", va="bottom", fontweight="bold", fontsize=9)
 
 # ---------------------------------------------------------------- (c) per-patient dBeta
 ax = fig.add_subplot(gs[1, 0])
@@ -135,8 +155,9 @@ bp = ax.boxplot([piv[p] for p in order], vert=True, widths=0.55, patch_artist=Tr
 for b, p in zip(bp["boxes"], order):
     b.set_facecolor(PCOL[p]); b.set_edgecolor("black"); b.set_linewidth(0.4)
 ax.axhline(0, color="#777777", ls="--", lw=0.7)
+ax.set_xticks(np.arange(1, len(order) + 1))
 ax.set_xticklabels([p.replace(" ", "\n").replace("(control)", "(ctrl)") for p in order],
-                   fontsize=5.2)
+                   fontsize=5.2, rotation=45, ha="right", linespacing=1.0)
 ax.set_ylabel("Spearman ρ (promoter β vs expression)")
 ax.set_title("e  Methylation–expression\ncoupling", loc="left", fontweight="bold")
 
